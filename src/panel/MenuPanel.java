@@ -17,9 +17,9 @@ public class MenuPanel extends JPanel implements ActionListener {
     private static MenuButton quitButton = new MenuButton("Quit");
 
     public MenuPanel() {
-        setPreferredSize(Pong.preferred);
-        setMaximumSize(Pong.maximum);
-        setMinimumSize(Pong.minimum);
+        setPreferredSize(Pong.PREFERRED);
+        setMaximumSize(Pong.MAXIMUM);
+        setMinimumSize(Pong.MINIMUM);
         setBackground(Color.black);
         setLayout(new GridBagLayout());
 

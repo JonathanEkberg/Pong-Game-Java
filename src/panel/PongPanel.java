@@ -28,9 +28,9 @@ public class PongPanel extends JPanel implements ActionListener {
 
     public PongPanel() {
         setLayout(null);
-        setPreferredSize(Pong.preferred);
-        setMaximumSize(Pong.maximum);
-        setMinimumSize(Pong.minimum);
+        setPreferredSize(Pong.PREFERRED);
+        setMaximumSize(Pong.MAXIMUM);
+        setMinimumSize(Pong.MINIMUM);
         setBackground((Color) Options.map.get("BackgroundColor"));
 
         timer.start();
@@ -47,10 +47,10 @@ public class PongPanel extends JPanel implements ActionListener {
         g2d.setColor(Color.green);
         g2d.setFont(Options.startFont);
         if (!gameStart) {
-            g2d.drawString("Press SPACE to start!", Pong.width / 2 - 200, Pong.height / 2 - 150);
+            g2d.drawString("Press SPACE to start!", Pong.WIDTH / 2 - 200, Pong.HEIGHT / 2 - 150);
         }
-        g2d.drawString(Integer.toString(playerScore), Pong.width / 3, 90);
-        g2d.drawString(Integer.toString(enemyScore), Pong.width * 2/3, 90);
+        g2d.drawString(Integer.toString(playerScore), Pong.WIDTH / 3, 90);
+        g2d.drawString(Integer.toString(enemyScore), Pong.WIDTH * 2/3, 90);
         if (gameVisible) {
             player.draw(g2d);
             enemy.draw(g2d);

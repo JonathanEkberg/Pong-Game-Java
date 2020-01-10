@@ -12,8 +12,8 @@ public class Ball {
     public Collision collision = new Collision();
 
     public static int size = Options.ballSize;
-    public static int x = Pong.width / 2 - size / 2;
-    public static int y = Pong.height / 2 - size / 2;
+    public static int x = Pong.WIDTH / 2 - size / 2;
+    public static int y = Pong.HEIGHT / 2 - size / 2;
     public static float speed = (float) Options.map.get("BallSpeed");
     public static int angle = startAngle();
 
@@ -30,8 +30,8 @@ public class Ball {
     }
 
     public static void reset() {
-        x = Pong.width / 2 - size / 2;
-        y = Pong.height / 2 - size / 2;
+        x = Pong.WIDTH / 2 - size / 2;
+        y = Pong.HEIGHT / 2 - size / 2;
         speed =(float) Options.map.get("BallSpeed");
     }
 

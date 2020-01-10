@@ -12,7 +12,7 @@ public class Player {
     public static int width = Options.paddleWidth;
     public static int height = Options.paddleHeight;
     public static int x = 50;
-    public static int y = Pong.height / 2 - height / 2;
+    public static int y = Pong.HEIGHT / 2 - height / 2;
     public static float speedY = 0f;
     public static float accel = (float) Options.map.get("Acceleration");
     public static float speedLimit = 10f;
@@ -28,7 +28,7 @@ public class Player {
 
     public static void reset() {
         x = 50;
-        y = Pong.height / 2 - height / 2;
+        y = Pong.HEIGHT / 2 - height / 2;
     }
 
     public void draw(Graphics2D g2d) {

@@ -17,6 +17,6 @@ public class MainOptionButton extends JButton {
         setForeground(Color.BLACK);
         setVisible(true);
         setFont(Options.font);
-        setPreferredSize(new Dimension((int) (Pong.width / 2), Pong.height / 6));
+        setPreferredSize(new Dimension((int) (Pong.WIDTH / 2), Pong.HEIGHT / 6));
     }
 }
