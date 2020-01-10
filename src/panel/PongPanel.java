@@ -56,6 +56,7 @@ public class PongPanel extends JPanel implements ActionListener {
             enemy.draw(g2d);
             ball.draw(g2d);
         }
+        g2d.drawString(Double.toString(Ball.angle), Pong.WIDTH / 2, 90);
     }
 
     public static void reset(String winner) {
@@ -65,11 +66,11 @@ public class PongPanel extends JPanel implements ActionListener {
         Enemy.reset();
         Ball.reset();
 
-        if (winner.equals("Player")) {
+        if (winner.toLowerCase().equals("player")) {
             playerScore++;
             System.out.println("Player won!");
         }
-        if (winner.equals("Enemy")) {
+        if (winner.toLowerCase().equals("enemy")) {
             enemyScore++;
             System.out.println("Enemy won!");
         }

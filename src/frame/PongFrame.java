@@ -46,5 +46,8 @@ public class PongFrame extends JFrame {
             dispose();
             System.exit(0);
         }
+        if (confirmed == JOptionPane.NO_OPTION) {
+            pongPanel.timer.start();
+        }
     }
 }

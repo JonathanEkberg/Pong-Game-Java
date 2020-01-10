@@ -150,7 +150,9 @@ public class Options {
             StringBuilder setting;
             for (int i = 0; i < settings.length; i++) {
                 boolean isFloat = false;
-                if (settings[i][1].contains(".") && (!settings[i][1].contains("wav"))) isFloat = true;
+                if (settings[i][1].contains(".") && (!settings[i][1].contains("wav")) && (!settings[i][1].contains("mp3"))) {
+                    isFloat = true;
+                }
                 setting = new StringBuilder();
                 setting.append(settings[i][0]).append("=").append(settings[i][1]).append(isFloat ? "f" : "");
                 bw.write(setting.toString() + "\n");

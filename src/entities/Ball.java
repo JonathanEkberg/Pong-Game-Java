@@ -16,6 +16,7 @@ public class Ball {
     public static int y = Pong.HEIGHT / 2 - size / 2;
     public static float speed = (float) Options.map.get("BallSpeed");
     public static int angle = startAngle();
+    public static int lastX, lastY, lastCenterX, lastCenterY;
 
     public static Ellipse2D ball;
 
@@ -25,6 +26,8 @@ public class Ball {
     }
 
     public static void posUpdate() {
+        lastX = x; lastY = y;
+        lastCenterX = x + size / 2; lastCenterY = y + size / 2;
         x += (speed * (float) Math.cos(Math.toRadians(angle)));
         y += (speed * (float) Math.sin(Math.toRadians(angle)));
     }
