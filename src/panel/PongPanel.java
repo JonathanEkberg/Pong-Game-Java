@@ -22,7 +22,7 @@ public class PongPanel extends JPanel implements ActionListener {
     public static int playerScore = 0;
     public static int enemyScore = 0;
     public static boolean gameStart = false;
-    public static boolean gameVisible = true;
+    public static boolean gameVisible = false;
     public Timer timer = new Timer(1000 / (Integer) Options.map.get("Fps"), this);
 
 
@@ -42,8 +42,6 @@ public class PongPanel extends JPanel implements ActionListener {
         g2d.setRenderingHint(
                 RenderingHints.KEY_ANTIALIASING,
                 (Boolean) Options.map.get("Antialiasing") ? RenderingHints.VALUE_ANTIALIAS_ON : RenderingHints.VALUE_ANTIALIAS_OFF);
-        g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
-                RenderingHints.VALUE_INTERPOLATION_BICUBIC);
         g2d.setColor(Color.green);
         g2d.setFont(Options.startFont);
         if (!gameStart) {
@@ -78,7 +76,7 @@ public class PongPanel extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (!gameStart) {
+        if (!gameStart && gameVisible) {
             if (PongFrame.keyDetector.isKeyPressed(KeyEvent.VK_SPACE)) {
                 PongPanel.gameStart = true;
             }

@@ -6,13 +6,14 @@ import entities.Player;
 import frame.PongFrame;
 import main.Pong;
 import options.Options;
+import panel.PongPanel;
 
 import java.awt.event.KeyEvent;
 
 public class Movement {
 
     public static void player() {
-        exitKey();
+        if (PongPanel.gameStart) exitKey();
 
         Player.moveUp = PongFrame.keyDetector.isKeyPressed(KeyEvent.VK_W);
         Player.moveDown = PongFrame.keyDetector.isKeyPressed(KeyEvent.VK_S);
