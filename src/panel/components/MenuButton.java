@@ -1,9 +1,7 @@
 package panel.components;
 
-
 import main.Pong;
 import options.Options;
-import panel.OptionPanel;
 
 import javax.swing.*;
 import java.awt.*;

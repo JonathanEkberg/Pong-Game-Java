@@ -1,6 +1,7 @@
 package entities;
 
 import collision.Collision;
+import input.Movement;
 import main.Pong;
 import options.Options;
 
@@ -16,21 +17,17 @@ public class Ball {
     public static int y = Pong.HEIGHT / 2 - size / 2;
     public static float speed = (float) Options.map.get("BallSpeed");
     public static int angle = startAngle();
-    public static int lastX, lastY, lastCenterX, lastCenterY;
+    public static int lastMinX, lastMinY, lastMaxX, lastMaxY, lastCenterX, lastCenterY;
+    public static Ball lastPos;
 
     public static Ellipse2D ball;
 
     public void update() {
         collision.check();
-        posUpdate();
+        Movement.ball();
     }
 
-    public static void posUpdate() {
-        lastX = x; lastY = y;
-        lastCenterX = x + size / 2; lastCenterY = y + size / 2;
-        x += (speed * (float) Math.cos(Math.toRadians(angle)));
-        y += (speed * (float) Math.sin(Math.toRadians(angle)));
-    }
+    
 
     public static void reset() {
         x = Pong.WIDTH / 2 - size / 2;
@@ -44,8 +41,7 @@ public class Ball {
     }
 
     private static int startAngle() {
-        int plusMinus = (int) (Math.random() * 1);
-        int randomAngle = (int) (Math.random() * 15);
-        return plusMinus == 0 ? randomAngle : -randomAngle;
+        int randomAngle = (int) (Math.random() * 45 + 1);
+        return (int) (Math.random() * 2) == 0 ? randomAngle : -randomAngle;
     }
 }

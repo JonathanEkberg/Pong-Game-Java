@@ -2,7 +2,6 @@ package panel;
 
 import frame.PongFrame;
 import main.Pong;
-import options.Options;
 import panel.components.MenuButton;
 
 import javax.swing.*;
@@ -53,13 +52,12 @@ public class MenuPanel extends JPanel implements ActionListener {
         add(quitButton, gbc);
         quitButton.addActionListener(this);
     }
-/*
-    @Override
-    public void paint(Graphics g) {
-        super.paint(g);
-        g.drawString("Made by Jonathan Ekberg", 10, (int) (Pong.pongFrame.getSize().getHeight() - 50));
-    }
-*/
+
+    /*
+     * @Override public void paint(Graphics g) { super.paint(g);
+     * g.drawString("Made by Jonathan Ekberg", 10, (int)
+     * (Pong.pongFrame.getSize().getHeight() - 50)); }
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == startButton) {

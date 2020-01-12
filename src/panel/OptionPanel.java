@@ -129,4 +129,6 @@ public class OptionPanel extends JPanel implements ActionListener, ItemListener 
 //    public void stateChanged(ChangeEvent e) {
 //        if (e.getSource() == playerColor);
 //    }
+
+    static final long serialVersionUID = 1;
 }

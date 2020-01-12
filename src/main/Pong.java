@@ -14,8 +14,8 @@ public class Pong {
     public static final Dimension PREFERRED = new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT);
     public static final Dimension MAXIMUM = new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT);
     public static final Dimension MINIMUM = new Dimension(SCREEN_WIDTH / 3, SCREEN_HEIGHT / 3);
-    public static int WIDTH = PREFERRED.width;
-    public static int HEIGHT = PREFERRED.height;
+    public static final int WIDTH = PREFERRED.width;
+    public static final int HEIGHT = PREFERRED.height;
 
     public static Options options;
 
@@ -26,8 +26,7 @@ public class Pong {
 
         try {
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

@@ -38,6 +38,17 @@ public class Movement {
         Player.y += Player.speedY;
     }
 
+    public static void ball() {
+        Ball.lastMinX = (int) Ball.ball.getMinX();
+        Ball.lastMinY = (int) Ball.ball.getMinY();
+        Ball.lastMaxX = (int) Ball.ball.getMaxX();
+        Ball.lastMaxY = (int) Ball.ball.getMaxY();
+        Ball.lastCenterX = (int) Ball.ball.getCenterX();
+        Ball.lastCenterY = (int) Ball.ball.getCenterY();
+        Ball.x += (Ball.speed * (float) Math.cos(Math.toRadians(Ball.angle)));
+        Ball.y += (Ball.speed * (float) Math.sin(Math.toRadians(Ball.angle)));
+    }
+
     public static void enemy() {
         if (!(Boolean) Options.map.get("Multiplayer")) {
             if ((Integer) Options.map.get("Difficulty") == 1) {

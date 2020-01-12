@@ -1,6 +1,5 @@
 package panel.components;
 
-
 import main.Pong;
 import options.Options;
 
