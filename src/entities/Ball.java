@@ -27,8 +27,6 @@ public class Ball {
         Movement.ball();
     }
 
-    
-
     public static void reset() {
         x = Pong.WIDTH / 2 - size / 2;
         y = Pong.HEIGHT / 2 - size / 2;
@@ -43,5 +41,10 @@ public class Ball {
     private static int startAngle() {
         int randomAngle = (int) (Math.random() * 45 + 1);
         return (int) (Math.random() * 2) == 0 ? randomAngle : -randomAngle;
+    }
+
+    public static void randomAngle() {
+        if      (angle > 0) angle += Math.random() * 5 + 1;
+        else if (angle < 0) angle += Math.random() * 5 + 1;
     }
 }

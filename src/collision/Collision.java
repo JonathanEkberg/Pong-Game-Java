@@ -28,7 +28,6 @@ public class Collision {
     }
 
 
-
     private boolean topIntersect() { return Ball.ball.getMinY() <= 0; }
 
     private boolean bottomIntersect() { return Ball.ball.getMaxY() >= Pong.HEIGHT; }
@@ -36,7 +35,6 @@ public class Collision {
     private boolean leftIntersect() { return Ball.ball.getMinX() <= 0; }
 
     private boolean rightIntersect() { return Ball.ball.getMaxX() >= Pong.WIDTH; }
-
 
 
     // Player collision check
@@ -83,6 +81,7 @@ public class Collision {
     private void topCollision() {
         System.out.print("Collision - Wall top | Angle: " + Ball.angle);
         Ball.angle = -Ball.angle;
+        Ball.randomAngle();
         Movement.ball();
         if (hitSound) SoundHandler.playSound();
         System.out.print("   New angle: " + Ball.angle + "\n");
@@ -91,6 +90,7 @@ public class Collision {
     private void bottomCollision() {
         System.out.print("Collision - Wall bottom | Angle: " + Ball.angle);
         Ball.angle = -Ball.angle;
+        Ball.randomAngle();
         Movement.ball();
         if (hitSound) SoundHandler.playSound();
         System.out.print("   New angle: " + Ball.angle + "\n");
@@ -102,6 +102,7 @@ public class Collision {
         System.out.print("Collision - Player side | Angle: " + Ball.angle);
         Ball.angle = -Ball.angle + 180;
         Ball.x = (int) Player.player.getMaxX();
+        Ball.randomAngle();
         Movement.ball();
         if (hitSound) SoundHandler.playSound();
         System.out.print("   New angle: " + Ball.angle + "\n");
@@ -132,6 +133,7 @@ public class Collision {
         System.out.print("Collision - Enemy side | Angle: " + Ball.angle);
         Ball.angle = -Ball.angle + 180;
         Ball.x = (int) Enemy.enemy.getMinX() - Ball.size;
+        Ball.randomAngle();
         Movement.ball();
         if (hitSound) SoundHandler.playSound();
         System.out.print("   New angle: " + Ball.angle + "\n");

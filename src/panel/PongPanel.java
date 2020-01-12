@@ -21,10 +21,15 @@ public class PongPanel extends JPanel implements ActionListener {
 
     public static int playerScore = 0;
     public static int enemyScore = 0;
+    public static int maxScore = 2;
     public static boolean gameStart = false;
     public static boolean gameVisible = false;
+    public static boolean gameOver = false;
     public Timer timer = new Timer(1000 / (Integer) Options.map.get("Fps"), this);
 
+    public static String winner;
+    private static int tick = 0;
+    public static Graphics2D g2d;
 
     public PongPanel() {
         setLayout(null);
@@ -32,21 +37,24 @@ public class PongPanel extends JPanel implements ActionListener {
         setMaximumSize(Pong.MAXIMUM);
         setMinimumSize(Pong.MINIMUM);
         setBackground((Color) Options.map.get("BackgroundColor"));
-
         timer.start();
     }
 
     public void paint(Graphics g) {
         super.paint(g);
-        Graphics2D g2d = (Graphics2D) g;
+        g2d = (Graphics2D) g;
         g2d.setRenderingHint(
                 RenderingHints.KEY_ANTIALIASING,
                 (Boolean) Options.map.get("Antialiasing") ? RenderingHints.VALUE_ANTIALIAS_ON : RenderingHints.VALUE_ANTIALIAS_OFF);
         g2d.setColor(Color.green);
+
         g2d.setFont(Options.startFont);
-        if (!gameStart) {
-            g2d.drawString("Press SPACE to start!", Pong.WIDTH / 2 - 200, Pong.HEIGHT / 2 - 150);
+        if (!gameStart && !gameOver) {
+            g2d.drawString("Press SPACE to start!", (Pong.WIDTH / 2f - (Pong.WIDTH / 4.8f)), Pong.HEIGHT / 2f - 150f);
+        } else if (!gameStart) {
+            g2d.drawString("Press SPACE to restart!", (Pong.WIDTH / 2f - (Pong.WIDTH / 4.8f)), Pong.HEIGHT / 2f - 200f);
         }
+
         g2d.drawString(Integer.toString(playerScore), Pong.WIDTH / 3, 90);
         g2d.drawString(Integer.toString(enemyScore), Pong.WIDTH * 2/3, 90);
         if (gameVisible) {
@@ -55,37 +63,69 @@ public class PongPanel extends JPanel implements ActionListener {
             ball.draw(g2d);
         }
         g2d.drawString(Double.toString(Ball.angle), Pong.WIDTH / 2, 90);
+
+        if (gameVisible && gameOver) drawCenteredString(g2d, winner);
+    }
+
+    public void drawCenteredString(Graphics g, String text) {
+        FontMetrics metrics = g.getFontMetrics(Options.font);
+        Rectangle rect = new Rectangle();
+        rect.width = Pong.WIDTH;
+        rect.height = Pong.HEIGHT;
+        int x = rect.x + (rect.width - metrics.stringWidth(text)) / 2;
+        int y = (int) (rect.y + ((rect.height - metrics.getHeight()) * 0.4) + metrics.getAscent());
+        g.setFont(Options.font);
+        g.drawString(text, x, y);
     }
 
     public static void reset(String winner) {
         gameStart = false;
 
+        if (winner.toLowerCase().equals("player")) {
+            if (playerScore != maxScore - 1) {
+                playerScore++;
+                System.out.println("Player won!");
+            } else winner("Player");
+        }
+
+        if (winner.toLowerCase().equals("enemy")) {
+            if (enemyScore != maxScore - 1) {
+                enemyScore++;
+                System.out.println("Enemy won!");
+            } else winner ("Enemy");
+        }
+
         Player.reset();
         Enemy.reset();
         Ball.reset();
+    }
 
-        if (winner.toLowerCase().equals("player")) {
-            playerScore++;
-            System.out.println("Player won!");
-        }
-        if (winner.toLowerCase().equals("enemy")) {
-            enemyScore++;
-            System.out.println("Enemy won!");
-        }
+    public static void winner(String winner1) {
+        gameOver = true;
+        winner = winner1 + " won the game!";
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (!gameStart && gameVisible) {
-            if (PongFrame.keyDetector.isKeyPressed(KeyEvent.VK_SPACE)) {
-                PongPanel.gameStart = true;
+        if (PongFrame.keyDetector.isKeyPressed(KeyEvent.VK_SPACE)) {
+            if (!gameStart && gameVisible) gameStart = true;
+
+            if (gameOver) {
+                gameOver = false;
+                playerScore = 0;
+                enemyScore = 0;
             }
         }
+
+            
         if (gameStart && gameVisible) {
             player.update();
             enemy.update();
             ball.update();
         }
         repaint();
+
+        tick++;
+        if (tick % (int) Options.map.get("Fps") == 0) System.out.println(tick / (int) Options.map.get("Fps"));
     }
 }
