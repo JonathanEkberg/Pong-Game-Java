@@ -10,14 +10,17 @@ import java.io.File;
 
 public class SoundHandler {
 
+    public static final File hitSoundBitch = new File((String) Options.map.get("HitSoundBitch"));
     public static final File hitSound = new File((String) Options.map.get("HitSound"));
+    public static File soundPlay;
     public static float volume = 0.0f;
     private static Clip clip;
     private static FloatControl gainControl;
 
     public static synchronized void playSound() {
         try {
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(hitSound);
+            soundPlay = ((int) (Math.random() * 2 + 1)) == 1 ? hitSoundBitch : hitSound;
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(soundPlay);
             clip = AudioSystem.getClip();
             clip.open(audioInputStream);
             gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);

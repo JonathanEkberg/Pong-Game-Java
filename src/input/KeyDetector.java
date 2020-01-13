@@ -25,6 +25,8 @@ public class KeyDetector implements KeyListener {
         return !keys[key];
     }
 
+    public void setKeyReleased(int key) { keys[key] = false; }
+
     @Override
     public void keyTyped(KeyEvent e) {
 

@@ -10,7 +10,7 @@ import sound.SoundHandler;
 
 public class Collision {
 
-    boolean hitSound = false;
+    boolean hitSound = true;
 
     public void check() {
         if      (playerIntersectSide())   playerSideCollision();

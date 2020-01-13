@@ -48,7 +48,7 @@ public class Movement {
         Ball.lastCenterY = (int) Ball.ball.getCenterY();
         Ball.x += (Ball.speed * (float) Math.cos(Math.toRadians(Ball.angle)));
         Ball.y += (Ball.speed * (float) Math.sin(Math.toRadians(Ball.angle)));
-        Ball.speed += (float) Options.map.get("BallAcceleration");
+        //Ball.speed += (float) Options.map.get("BallAcceleration");
     }
 
     public static void enemy() {
@@ -84,6 +84,7 @@ public class Movement {
 
     private static void exitKey() {
         if (PongFrame.keyDetector.isKeyPressed(KeyEvent.VK_ESCAPE)) {
+            PongFrame.keyDetector.setKeyReleased(KeyEvent.VK_ESCAPE);
             Pong.pongFrame.exitDialog();
         }
     }
