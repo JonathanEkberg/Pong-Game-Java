@@ -24,6 +24,8 @@ public class Options {
     private static File settingsFile = new File("src\\settings.ini");
     private static File settingsDefaultFile = new File("src\\settings_default.ini");
 
+    public Options() { readSettings(); }
+
     public void readSettings() {
         readSettingsFromFile(settingsFile);
     }

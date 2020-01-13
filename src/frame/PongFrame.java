@@ -39,7 +39,7 @@ public class PongFrame extends JFrame {
     }
 
     public void exitDialog() {
-        int confirmed = JOptionPane.showConfirmDialog(null, "Do you want to exit game?", "Exit dialog",
+        int confirmed = JOptionPane.showConfirmDialog(null, "Do you want to the exit game?", "Exit dialog",
                 JOptionPane.YES_NO_OPTION);
         if (confirmed == JOptionPane.YES_OPTION) {
             pongPanel.timer.stop();
@@ -47,10 +47,5 @@ public class PongFrame extends JFrame {
             dispose();
             System.exit(0);
         }
-        if (confirmed == JOptionPane.NO_OPTION) {
-            pongPanel.timer.start();
-        }
     }
-
-    static final long serialVersionUID = 1;
 }
