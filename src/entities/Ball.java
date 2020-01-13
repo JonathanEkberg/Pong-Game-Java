@@ -1,7 +1,7 @@
 package entities;
 
-import collision.Collision;
-import input.Movement;
+import logic.Collision;
+import logic.Movement;
 import main.Pong;
 import options.Options;
 
@@ -15,10 +15,9 @@ public class Ball {
     public static int size = Options.ballSize;
     public static int x = Pong.WIDTH / 2 - size / 2;
     public static int y = Pong.HEIGHT / 2 - size / 2;
-    public static float speed = (float) Options.map.get("BallSpeed");
-    public static int angle = startAngle();
+    public static float speed = Options.getFloat("BallSpeed");
+    public static float angle = startAngle();
     public static int lastMinX, lastMinY, lastMaxX, lastMaxY, lastCenterX, lastCenterY;
-    public static Ball lastPos;
 
     public static Ellipse2D ball;
 
@@ -30,22 +29,30 @@ public class Ball {
     public static void reset() {
         x = Pong.WIDTH / 2 - size / 2;
         y = Pong.HEIGHT / 2 - size / 2;
-        speed =(float) Options.map.get("BallSpeed");
+        speed = Options.getFloat("BallSpeed");
+        angle = startAngle();
     }
 
     public void draw(Graphics2D g2d) {
-        g2d.setColor((Color) Options.map.get("BallColor"));
+        g2d.setColor(Options.getColor("BallColor"));
         g2d.fill(ball = new Ellipse2D.Double(x, y, size, size));
+        g2d.setColor(Color.green);
+        g2d.drawLine((int) Ball.ball.getCenterX(), (int) Ball.ball.getCenterY(), (int) (Ball.ball.getCenterX() + Math.cos(Ball.angle) * (Ball.ball.getWidth() * 1.5)),  (int) (Ball.ball.getCenterY() + Math.sin(Ball.angle) * (Ball.ball.getWidth() * 1.5)));
     }
 
-    private static int startAngle() {
-        int randomAngle = (int) (Math.random() * (int) Options.map.get("MaxStartAngle") + 1);
-        return (int) (Math.random() * 2) == 0 ? randomAngle : -randomAngle;
+    private static float startAngle() {
+        int randomAngle = (int) (Math.random() * Options.getFloat("MaxStartAngle") + Collision.radianConst / 90);
+        return (int) (Math.random() * 2 + 1) == 0 ? randomAngle : -randomAngle;
     }
 
     public static void randomAngle() {
-        if      (angle == 0 || angle == -180) angle += Math.random() * (int) Options.map.get("CollisionRandomAngle") + 1;
-        else if (angle > 0) angle += Math.random() * (int) Options.map.get("CollisionRandomAngle") + 1;
-        else angle -= Math.random() * (int) Options.map.get("CollisionRandomAngle") + 1;
+        if (angle == 0 || angle == -Collision.radianConst * 2)
+            angle += Math.random() * Options.getFloat("CollisionRandomAngle") + Collision.radianConst / 90;
+
+        else if (angle > 0)
+            angle += Math.random() * Options.getFloat("CollisionRandomAngle") + Collision.radianConst / 90;
+
+        else
+            angle -= Math.random() * Options.getFloat("CollisionRandomAngle") + Math.PI / 90;
     }
 }

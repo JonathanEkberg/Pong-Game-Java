@@ -1,9 +1,8 @@
-package collision;
+package logic;
 
 import entities.Ball;
 import entities.Enemy;
 import entities.Player;
-import input.Movement;
 import main.Pong;
 import panel.PongPanel;
 import sound.SoundHandler;
@@ -100,7 +99,7 @@ public class Collision {
     // Player collision movement
     private void playerSideCollision() {
         System.out.print("Collision - Player side | Angle: " + Ball.angle);
-        Ball.angle = -Ball.angle + 180;
+        Ball.angle = (int) (-Ball.angle + (radianConst * 2));
         Ball.x = (int) Player.player.getMaxX();
         Ball.randomAngle();
         Movement.ball();
@@ -110,7 +109,7 @@ public class Collision {
 
     private void playerTopCollision() {
         System.out.print("Collision - Player top | Angle: " + Ball.angle);
-        Ball.angle += 90;
+        Ball.angle += radianConst;
         Ball.y = (int) Player.player.getMinY() - Ball.size; 
         Movement.ball();
         if (hitSound) SoundHandler.playSound();
@@ -119,7 +118,7 @@ public class Collision {
 
     private void playerBottomCollision() {
         System.out.print("Collision - Player bottom | Angle: " + Ball.angle);
-        Ball.angle -= 90;
+        Ball.angle -= radianConst;
         Ball.y = (int) Player.player.getMaxY();
         Movement.ball(); 
         if (hitSound) SoundHandler.playSound();
@@ -131,7 +130,7 @@ public class Collision {
     // Enemy collision movement
     private void enemySideCollision() {
         System.out.print("Collision - Enemy side | Angle: " + Ball.angle);
-        Ball.angle = -Ball.angle + 180;
+        Ball.angle = (int) (-Ball.angle + (radianConst * 2));
         Ball.x = (int) Enemy.enemy.getMinX() - Ball.size;
         Ball.randomAngle();
         Movement.ball();
@@ -141,7 +140,7 @@ public class Collision {
 
     private void enemyTopCollision() {
         System.out.print("Collision - Enemy top | Angle: " + Ball.angle);
-        Ball.angle -= 90;
+        Ball.angle -= radianConst;
         Ball.y = (int) Enemy.enemy.getMinY() - Ball.size; 
         Movement.ball();
         if (hitSound) SoundHandler.playSound();
@@ -150,11 +149,17 @@ public class Collision {
 
     private void enemyBottomCollision() {
         System.out.print("Collision - Enemy bottom | Angle: " + Ball.angle);
-        Ball.angle += 90;
+        Ball.angle += radianConst;
         Ball.y = (int) Enemy.enemy.getMaxY(); 
         Movement.ball();
         if (hitSound) SoundHandler.playSound();
         System.out.print("   New angle: " + Ball.angle + "\n");
     }
+
+    public static double getRadian(double angle) {
+        return Math.PI / angle;
+    }
+
+    public static final double radianConst = Math.PI / 2;
 
 }

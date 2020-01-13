@@ -17,7 +17,7 @@ public class SoundHandler {
     private static Clip clip;
     private static FloatControl gainControl;
 
-    public static synchronized void playSound() {
+    public static void playSound() {
         try {
             soundPlay = ((int) (Math.random() * 2 + 1)) == 1 ? hitSoundBitch : hitSound;
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(soundPlay);

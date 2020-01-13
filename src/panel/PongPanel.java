@@ -25,7 +25,7 @@ public class PongPanel extends JPanel implements ActionListener {
     public static boolean gameStart = false;
     public static boolean gameVisible = false;
     public static boolean gameOver = false;
-    public Timer timer = new Timer(1000 / (Integer) Options.map.get("Fps"), this);
+    public Timer timer = new Timer(1000 / (int) Options.map.get("Fps"), this);
 
     public static String winner;
     private static int tick = 0;
@@ -62,7 +62,7 @@ public class PongPanel extends JPanel implements ActionListener {
             enemy.draw(g2d);
             ball.draw(g2d);
         }
-        g2d.drawString(Double.toString(Ball.angle), Pong.WIDTH / 2, 90);
+        g2d.drawString(Double.toString(Ball.angle % (2 * Math.PI)), Pong.WIDTH / 2, 90);
 
         if (gameVisible && gameOver) drawCenteredString(g2d, winner);
     }

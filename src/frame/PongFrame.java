@@ -38,7 +38,7 @@ public class PongFrame extends JFrame {
         repaint();
     }
 
-    public void exitDialog() {
+    public void  exitDialog() {
         int confirmed = JOptionPane.showConfirmDialog(null, "Do you want to the exit game?", "Exit dialog",
                 JOptionPane.YES_NO_OPTION);
         if (confirmed == JOptionPane.YES_OPTION) {

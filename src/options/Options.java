@@ -200,4 +200,24 @@ public class Options {
     public static String colorFormatter(Color color) {
         return String.format("#%02X%02X%02X", color.getRed(), color.getGreen(), color.getBlue());
     }
+
+    public static String getString(String key) {
+        return (String) map.get(key);
+    }
+
+    public static int getInt(String key) {
+        return (int) map.get(key);
+    }
+
+    public static float getFloat(String key) {
+        return (float) map.get(key);
+    }
+
+    public static Color getColor(String key) {
+        return (Color) map.get(key);
+    }
+
+    public static Boolean getBoolean(String key) {
+        return (Boolean) map.get(key);
+    }
 }

@@ -14,12 +14,12 @@ import java.awt.event.ItemListener;
 
 public class OptionPanel extends JPanel implements ActionListener, ItemListener {
 
-    private static MenuButton testButton = new MenuButton("Test");
-    private static MenuButton backButton = new MenuButton("Back");
-    private static JButton playerColorButton = new MenuButton("Player color");
-    private static JRadioButton easyRadio = new JRadioButton("Easy", true);
-    private static JRadioButton normalRadio = new JRadioButton("Normal");
-    private static JRadioButton hardRadio = new JRadioButton("Hard");
+    private static final MenuButton testButton = new MenuButton("Test");
+    private static final MenuButton backButton = new MenuButton("Back");
+    private static final JButton playerColorButton = new MenuButton("Player color");
+    private static final JRadioButton easyRadio = new JRadioButton("Easy", true);
+    private static final JRadioButton normalRadio = new JRadioButton("Normal");
+    private static final JRadioButton hardRadio = new JRadioButton("Hard");
     //private static JColorChooser playerColor = new JColorChooser();
 
     public OptionPanel() {
@@ -129,6 +129,4 @@ public class OptionPanel extends JPanel implements ActionListener, ItemListener 
 //    public void stateChanged(ChangeEvent e) {
 //        if (e.getSource() == playerColor);
 //    }
-
-    static final long serialVersionUID = 1;
 }
