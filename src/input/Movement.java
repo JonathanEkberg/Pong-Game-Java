@@ -51,50 +51,56 @@ public class Movement {
     }
 
     public static void enemy() {
-        if (!(Boolean) Options.map.get("Multiplayer")) {
-            if ((Integer) Options.map.get("Difficulty") == 1) {
-                if (Ball.y > Enemy.enemy.getCenterY() + (Enemy.height / 2f)) {
-                    if (Enemy.speedY < Enemy.speedLimit) {
-                        Enemy.speedY += Enemy.accel;
-                    }
-                }
-                if (Ball.y < Enemy.enemy.getCenterY() - (Enemy.height / 2f)) {
-                    if (Enemy.speedY > -Enemy.speedLimit) {
-                        Enemy.speedY -= Enemy.accel;
-                    }
-                }
-                if (Enemy.y + Enemy.height > Pong.HEIGHT) Enemy.y = Pong.HEIGHT - Enemy.height;
-                if (Enemy.y < 0) Enemy.y = 0;
-                Enemy.y += Enemy.speedY;
-            } else {
-                Enemy.y = Ball.y - Enemy.height / 2;
+        if (!(Boolean) Options.map.get("Multiplayer"))
+            computerMove();
+        else enemyMove();
+    }
 
-                if (Enemy.y + Enemy.height > Pong.HEIGHT) Enemy.y = Pong.HEIGHT - Enemy.height;
-                if (Enemy.y < 0) Enemy.y = 0;
-            }
-        } else {
-            Enemy.moveUp = PongFrame.keyDetector.isKeyPressed(KeyEvent.VK_UP);
-            Enemy.moveDown = PongFrame.keyDetector.isKeyPressed(KeyEvent.VK_DOWN);
+    private static void enemyMove() {
+        Enemy.moveUp = PongFrame.keyDetector.isKeyPressed(KeyEvent.VK_UP);
+        Enemy.moveDown = PongFrame.keyDetector.isKeyPressed(KeyEvent.VK_DOWN);
 
-            if (Enemy.moveUp && Enemy.speedY > -Enemy.speedLimit) {
+        if (Enemy.moveUp && Enemy.speedY > -Enemy.speedLimit) {
+            Enemy.speedY -= Enemy.accel;
+        }
+        if (Enemy.moveDown && Enemy.speedY < Enemy.speedLimit) {
+            Enemy.speedY += Enemy.accel;
+        }
+        if (!Enemy.moveUp && !Enemy.moveDown) {
+            if (Enemy.speedY > 0) {
                 Enemy.speedY -= Enemy.accel;
             }
-            if (Enemy.moveDown && Enemy.speedY < Enemy.speedLimit) {
+            if (Enemy.speedY < 0) {
                 Enemy.speedY += Enemy.accel;
             }
-            if (!Enemy.moveUp && !Enemy.moveDown) {
-                if (Enemy.speedY > 0) {
-                    Enemy.speedY -= Enemy.accel;
-                }
-                if (Enemy.speedY < 0) {
+        }
+
+        if (Enemy.y + Enemy.height > Pong.HEIGHT) Enemy.y = Pong.HEIGHT - Enemy.height;
+        if (Enemy.y < 0) Enemy.y = 0;
+
+        Enemy.y += Enemy.speedY;
+    }
+
+    private static void computerMove() {
+        if ((Integer) Options.map.get("Difficulty") == 1) {
+            if (Ball.y > Enemy.enemy.getCenterY() + (Enemy.height / 2f)) {
+                if (Enemy.speedY < Enemy.speedLimit) {
                     Enemy.speedY += Enemy.accel;
                 }
             }
+            if (Ball.y < Enemy.enemy.getCenterY() - (Enemy.height / 2f)) {
+                if (Enemy.speedY > -Enemy.speedLimit) {
+                    Enemy.speedY -= Enemy.accel;
+                }
+            }
+            if (Enemy.y + Enemy.height > Pong.HEIGHT) Enemy.y = Pong.HEIGHT - Enemy.height;
+            if (Enemy.y < 0) Enemy.y = 0;
+            Enemy.y += Enemy.speedY;
+        } else {
+            Enemy.y = Ball.y - Enemy.height / 2;
 
             if (Enemy.y + Enemy.height > Pong.HEIGHT) Enemy.y = Pong.HEIGHT - Enemy.height;
             if (Enemy.y < 0) Enemy.y = 0;
-
-            Enemy.y += Enemy.speedY;
         }
     }
 
