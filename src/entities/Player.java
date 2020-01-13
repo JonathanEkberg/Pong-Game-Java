@@ -15,7 +15,7 @@ public class Player {
     public static int y = Pong.HEIGHT / 2 - height / 2;
     public static float speedY = 0f;
     public static float accel = (float) Options.map.get("Acceleration");
-    public static float speedLimit = 10f;
+    public static float speedLimit = (float) Options.map.get("SpeedLimit");
 
     public static boolean moveUp = false;
     public static boolean moveDown = false;

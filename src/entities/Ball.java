@@ -39,12 +39,13 @@ public class Ball {
     }
 
     private static int startAngle() {
-        int randomAngle = (int) (Math.random() * 45 + 1);
+        int randomAngle = (int) (Math.random() * (int) Options.map.get("MaxStartAngle") + 1);
         return (int) (Math.random() * 2) == 0 ? randomAngle : -randomAngle;
     }
 
     public static void randomAngle() {
-        if      (angle > 0) angle += Math.random() * 5 + 1;
-        else if (angle < 0) angle += Math.random() * 5 + 1;
+        if      (angle == 0 || angle == -180) angle += Math.random() * (int) Options.map.get("CollisionRandomAngle") + 1;
+        else if (angle > 0) angle += Math.random() * (int) Options.map.get("CollisionRandomAngle") + 1;
+        else angle -= Math.random() * (int) Options.map.get("CollisionRandomAngle") + 1;
     }
 }

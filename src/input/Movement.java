@@ -48,10 +48,11 @@ public class Movement {
         Ball.lastCenterY = (int) Ball.ball.getCenterY();
         Ball.x += (Ball.speed * (float) Math.cos(Math.toRadians(Ball.angle)));
         Ball.y += (Ball.speed * (float) Math.sin(Math.toRadians(Ball.angle)));
+        Ball.speed += (float) Options.map.get("BallAcceleration");
     }
 
     public static void enemy() {
-        if (!(Boolean) Options.map.get("Multiplayer"))
+        if (!((Boolean) Options.map.get("Multiplayer")))
             computerMove();
         else enemyMove();
     }
@@ -81,7 +82,31 @@ public class Movement {
         Enemy.y += Enemy.speedY;
     }
 
+    private static void exitKey() {
+        if (PongFrame.keyDetector.isKeyPressed(KeyEvent.VK_ESCAPE)) {
+            Pong.pongFrame.exitDialog();
+        }
+    }
+
     private static void computerMove() {
+        int difficulty = (Integer) Options.map.get("Difficulty");
+        if (Ball.ball.getMaxY() > (Enemy.enemy.getCenterY() + ((Enemy.enemy.getHeight() * 1/3f) * difficulty))) {
+            if (Enemy.speedY < Enemy.speedLimit) Enemy.speedY += Enemy.accel;
+
+        } else if (Ball.ball.getMinY() < Enemy.enemy.getCenterY() - ((Enemy.enemy.getHeight() * 1/3f) * difficulty)) {
+            if (Enemy.speedY > -Enemy.speedLimit) Enemy.speedY -= Enemy.accel;
+
+        } else {
+            if (Enemy.speedY > 0) Enemy.speedY -= Enemy.accel;
+            else if (Enemy.speedY < 0) Enemy.speedY += Enemy.accel;
+        }
+
+        if (Enemy.enemy.getMaxY() >= Pong.HEIGHT) Enemy.y = (int) (Pong.HEIGHT - Enemy.enemy.getHeight());
+        if (Enemy.enemy.getMinY() <= 0) Enemy.y = 0;
+        Enemy.y += Enemy.speedY;
+    }
+
+    private static void computerMoveOld() {
         if ((Integer) Options.map.get("Difficulty") == 1) {
             if (Ball.y > Enemy.enemy.getCenterY() + (Enemy.height / 2f)) {
                 if (Enemy.speedY < Enemy.speedLimit) {
@@ -96,17 +121,6 @@ public class Movement {
             if (Enemy.y + Enemy.height > Pong.HEIGHT) Enemy.y = Pong.HEIGHT - Enemy.height;
             if (Enemy.y < 0) Enemy.y = 0;
             Enemy.y += Enemy.speedY;
-        } else {
-            Enemy.y = Ball.y - Enemy.height / 2;
-
-            if (Enemy.y + Enemy.height > Pong.HEIGHT) Enemy.y = Pong.HEIGHT - Enemy.height;
-            if (Enemy.y < 0) Enemy.y = 0;
-        }
-    }
-
-    private static void exitKey() {
-        if (PongFrame.keyDetector.isKeyPressed(KeyEvent.VK_ESCAPE)) {
-            Pong.pongFrame.exitDialog();
         }
     }
 }

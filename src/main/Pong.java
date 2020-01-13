@@ -22,7 +22,6 @@ public class Pong {
     public Pong() {
         options = new Options();
         options.readSettings();
-        new Playground();
 
         try {
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
