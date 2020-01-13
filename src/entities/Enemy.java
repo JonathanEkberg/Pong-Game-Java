@@ -11,8 +11,8 @@ public class Enemy {
 
     public static int width = Options.paddleWidth;
     public static int height = Options.paddleHeight;
-    public static int x = Pong.width - 50 - Options.paddleWidth;
-    public static int y = Pong.height / 2 - height / 2;
+    public static int x = Pong.WIDTH - 50 - Options.paddleWidth;
+    public static int y = Pong.HEIGHT / 2 - height / 2;
     public static float speedY = 0f;
     public static float accel = (float) Options.map.get("EnemyAcceleration");
     public static float speedLimit = (float) Options.map.get("SpeedLimit");
@@ -26,8 +26,8 @@ public class Enemy {
     }
 
     public static void reset() {
-        x = Pong.width - 50 - Options.paddleWidth;
-        y = Pong.height / 2 - height / 2;
+        x = Pong.WIDTH - 50 - Options.paddleWidth;
+        y = Pong.HEIGHT / 2 - height / 2;
     }
 
     public void draw(Graphics2D g2d) {

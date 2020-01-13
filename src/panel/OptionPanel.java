@@ -23,9 +23,9 @@ public class OptionPanel extends JPanel implements ActionListener, ItemListener 
     //private static JColorChooser playerColor = new JColorChooser();
 
     public OptionPanel() {
-        setPreferredSize(Pong.preferred);
-        setMaximumSize(Pong.maximum);
-        setMinimumSize(Pong.minimum);
+        setPreferredSize(Pong.PREFERRED);
+        setMaximumSize(Pong.MAXIMUM);
+        setMinimumSize(Pong.MINIMUM);
         setBackground(Color.black);
         setLayout(new GridBagLayout());
         addComponents();
@@ -129,4 +129,6 @@ public class OptionPanel extends JPanel implements ActionListener, ItemListener 
 //    public void stateChanged(ChangeEvent e) {
 //        if (e.getSource() == playerColor);
 //    }
+
+    static final long serialVersionUID = 1;
 }

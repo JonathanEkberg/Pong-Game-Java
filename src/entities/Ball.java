@@ -1,6 +1,7 @@
 package entities;
 
 import collision.Collision;
+import input.Movement;
 import main.Pong;
 import options.Options;
 
@@ -12,26 +13,23 @@ public class Ball {
     public Collision collision = new Collision();
 
     public static int size = Options.ballSize;
-    public static int x = Pong.width / 2 - size / 2;
-    public static int y = Pong.height / 2 - size / 2;
+    public static int x = Pong.WIDTH / 2 - size / 2;
+    public static int y = Pong.HEIGHT / 2 - size / 2;
     public static float speed = (float) Options.map.get("BallSpeed");
     public static int angle = startAngle();
+    public static int lastMinX, lastMinY, lastMaxX, lastMaxY, lastCenterX, lastCenterY;
+    public static Ball lastPos;
 
     public static Ellipse2D ball;
 
     public void update() {
         collision.check();
-        posUpdate();
-    }
-
-    public static void posUpdate() {
-        x += (speed * (float) Math.cos(Math.toRadians(angle)));
-        y += (speed * (float) Math.sin(Math.toRadians(angle)));
+        Movement.ball();
     }
 
     public static void reset() {
-        x = Pong.width / 2 - size / 2;
-        y = Pong.height / 2 - size / 2;
+        x = Pong.WIDTH / 2 - size / 2;
+        y = Pong.HEIGHT / 2 - size / 2;
         speed =(float) Options.map.get("BallSpeed");
     }
 
@@ -41,8 +39,12 @@ public class Ball {
     }
 
     private static int startAngle() {
-        int plusMinus = (int) (Math.random() * 1);
-        int randomAngle = (int) (Math.random() * 15);
-        return plusMinus == 0 ? randomAngle : -randomAngle;
+        int randomAngle = (int) (Math.random() * 45 + 1);
+        return (int) (Math.random() * 2) == 0 ? randomAngle : -randomAngle;
+    }
+
+    public static void randomAngle() {
+        if      (angle > 0) angle += Math.random() * 5 + 1;
+        else if (angle < 0) angle += Math.random() * 5 + 1;
     }
 }

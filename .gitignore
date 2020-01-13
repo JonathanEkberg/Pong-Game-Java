@@ -1,5 +1,8 @@
 # User files
 .idea
+.vscode
+compilation
+settings.ini
 
 # Compiled class file
 *.class

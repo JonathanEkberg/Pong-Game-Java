@@ -8,13 +8,12 @@ import main.Pong;
 import options.Options;
 import panel.PongPanel;
 
-import javax.swing.*;
 import java.awt.event.KeyEvent;
 
 public class Movement {
 
     public static void player() {
-        exitKey();
+        if (PongPanel.gameStart) exitKey();
 
         Player.moveUp = PongFrame.keyDetector.isKeyPressed(KeyEvent.VK_W);
         Player.moveDown = PongFrame.keyDetector.isKeyPressed(KeyEvent.VK_S);
@@ -34,10 +33,21 @@ public class Movement {
             }
         }
 
-        if (Player.y + Player.height > Pong.height) Player.y = Pong.height - Player.height;
+        if (Player.y + Player.height > Pong.HEIGHT) Player.y = Pong.HEIGHT - Player.height;
         if (Player.y < 0) Player.y = 0;
 
         Player.y += Player.speedY;
+    }
+
+    public static void ball() {
+        Ball.lastMinX = (int) Ball.ball.getMinX();
+        Ball.lastMinY = (int) Ball.ball.getMinY();
+        Ball.lastMaxX = (int) Ball.ball.getMaxX();
+        Ball.lastMaxY = (int) Ball.ball.getMaxY();
+        Ball.lastCenterX = (int) Ball.ball.getCenterX();
+        Ball.lastCenterY = (int) Ball.ball.getCenterY();
+        Ball.x += (Ball.speed * (float) Math.cos(Math.toRadians(Ball.angle)));
+        Ball.y += (Ball.speed * (float) Math.sin(Math.toRadians(Ball.angle)));
     }
 
     public static void enemy() {
@@ -53,13 +63,13 @@ public class Movement {
                         Enemy.speedY -= Enemy.accel;
                     }
                 }
-                if (Enemy.y + Enemy.height > Pong.height) Enemy.y = Pong.height - Enemy.height;
+                if (Enemy.y + Enemy.height > Pong.HEIGHT) Enemy.y = Pong.HEIGHT - Enemy.height;
                 if (Enemy.y < 0) Enemy.y = 0;
                 Enemy.y += Enemy.speedY;
             } else {
                 Enemy.y = Ball.y - Enemy.height / 2;
 
-                if (Enemy.y + Enemy.height > Pong.height) Enemy.y = Pong.height - Enemy.height;
+                if (Enemy.y + Enemy.height > Pong.HEIGHT) Enemy.y = Pong.HEIGHT - Enemy.height;
                 if (Enemy.y < 0) Enemy.y = 0;
             }
         } else {
@@ -81,7 +91,7 @@ public class Movement {
                 }
             }
 
-            if (Enemy.y + Enemy.height > Pong.height) Enemy.y = Pong.height - Enemy.height;
+            if (Enemy.y + Enemy.height > Pong.HEIGHT) Enemy.y = Pong.HEIGHT - Enemy.height;
             if (Enemy.y < 0) Enemy.y = 0;
 
             Enemy.y += Enemy.speedY;

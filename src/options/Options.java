@@ -6,18 +6,17 @@ import java.awt.*;
 import java.io.*;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Map;
 
 public class Options {
 
     public static HashMap<String, Object> map = new HashMap<>();
     public static String[][] settings;
 
-    public static int paddleHeight = (short) (Pong.height / 6);
-    public static int paddleWidth = (short) (Pong.width / 77);
-    public static int ballSize = (short) (Pong.width / 60);
-    public static int fontSize = Pong.preferred.height / 8;
-    public static int startFontSize = Pong.preferred.height / 12;
+    public static int paddleHeight = (short) (Pong.HEIGHT / 6);
+    public static int paddleWidth = (short) (Pong.WIDTH / 77);
+    public static int ballSize = (short) (Pong.WIDTH / 60);
+    public static int fontSize = Pong.PREFERRED.height / 8;
+    public static int startFontSize = Pong.PREFERRED.height / 12;
 
     public static Font font = new Font("DPComic", Font.PLAIN, fontSize);
     public static Font startFont = new Font("DPComic", Font.PLAIN, startFontSize);
@@ -148,9 +147,11 @@ public class Options {
         try {
             BufferedWriter bw = new BufferedWriter(new FileWriter(file));
             StringBuilder setting;
-            boolean isFloat = false;
             for (int i = 0; i < settings.length; i++) {
-                if (settings[i][1].contains(".")) isFloat = true;
+                boolean isFloat = false;
+                if (settings[i][1].contains(".") && (!settings[i][1].contains("wav")) && (!settings[i][1].contains("mp3"))) {
+                    isFloat = true;
+                }
                 setting = new StringBuilder();
                 setting.append(settings[i][0]).append("=").append(settings[i][1]).append(isFloat ? "f" : "");
                 bw.write(setting.toString() + "\n");
